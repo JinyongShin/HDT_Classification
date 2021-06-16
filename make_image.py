@@ -1,0 +1,80 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
+import numpy as np
+import awkward as ak
+import glob
+import matplotlib.pyplot as plt
+import h5py
+
+
+# In[2]:
+
+
+file_list = glob.glob("*.npy")
+print(len(file_list)," files to do")
+
+
+# In[3]:
+
+
+# x-axis : eta , y-axis : phi , z-axis : pt
+def getimage(pt,eta,phi):
+    hs=[]
+    rnge=((-2.4,2.4),(-np.pi,np.pi))
+    
+    for i in range(len(eta)):
+        h=np.histogram2d(ak.to_numpy(eta[i]),ak.to_numpy(phi[i]),weights=ak.to_numpy(pt[i]),bins=64,range=rnge)
+        hs.append(h[0])
+    return np.stack(hs)
+
+
+# In[4]:
+
+
+n_do = 0
+for infile in file_list:
+    print('Processing ',infile)
+    
+    dic=np.load(infile,allow_pickle=True)[()]
+       
+    #tracker hist
+    t_pt=dic['sel_tracks'].PT
+    t_eta=dic['sel_tracks'].Eta
+    t_phi=dic['sel_tracks'].Phi
+    t_im=getimage(t_pt,t_eta,t_phi)
+    
+    #ECAL hist
+    e_pt=dic['sel_towers'].Eem
+    e_eta=dic['sel_towers'].Eta
+    e_phi=dic['sel_towers'].Phi
+    e_im=getimage(e_pt,e_eta,e_phi)
+    
+    #HCAL hist
+    h_pt=dic['sel_towers'].Ehad
+    h_eta=dic['sel_towers'].Eta
+    h_phi=dic['sel_towers'].Phi
+    h_im=getimage(h_pt,h_eta,h_phi)
+    
+    #merge HCAL, ECAL Tracker images
+    #for pytorch axis =1 , for tensorflow axis=-1
+    ax = 1
+    t_im = np.expand_dims(t_im,ax)
+    e_im = np.expand_dims(e_im,ax)
+    h_im = np.expand_dims(h_im,ax)
+    images = np.concatenate([t_im,e_im,h_im],axis=ax)
+    
+    #Save images to h5 files
+    out_name = infile.split(".")[0]+'.h5'
+    with h5py.File(out_name,'w',libver='latest',swmr='True') as outFile:
+        g = outFile.create_group('all_events')
+        g.create_dataset('weights',data=np.ones(len(images)),dtype='f4')
+        g.create_dataset('images',data=images)
+    
+    print(out_name + ' saved!')
+    n_do += 1
+    print(n_do , " of ", len(file_list)," is done")
+
