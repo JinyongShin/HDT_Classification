@@ -51,7 +51,7 @@ def getimage(pt,eta,phi):
 	rnge=((-2.4,2.4),(-np.pi,np.pi))
 	
 	for i in range(len(eta)):
-		h=np.histogram2d(ak.to_numpy(eta[i]),ak.to_numpy(phi[i]),weights=ak.to_numpy(pt[i]),bins=224,range=rnge)
+		h=np.histogram2d(ak.to_numpy(eta[i]),ak.to_numpy(phi[i]),weights=ak.to_numpy(pt[i]),bins=64,range=rnge)
 		hs.append(h[0])
 	return np.stack(hs)
 
