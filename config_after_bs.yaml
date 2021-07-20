@@ -1,0 +1,82 @@
+## Configuration to plot MET Histogram
+samples:
+  - name: Top pair (had)
+    label: 0
+    path: /x4/cms/jyshin/TT_Had/condorDelPyOut/
+    xsec: 2.105E+02
+    ngen: 2000000
+  - name: Top pair (1l)
+    label: 0
+    path: /x4/cms/jyshin/TT_1l/condorDelPyOut/
+    xsec: 2.111E+02
+    ngen: 1810000
+  - name: Top pair + W 
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/TTWJets_NLO/
+    xsec: 1.13179
+    ngen: 1000000
+  - name: Top pair + Z
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/TTZJets_NLO/
+    xsec: 0.884951
+    ngen: 1000000
+  - name: DYJetsLO
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/DYJetsLO/
+    xsec: 13937.5
+    ngen: 1000000
+  - name: DYJetsToQQ
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/DYJetsToQQ_LO/
+    xsec: 99972.5
+    ngen: 1000000
+  - name: Single Top (s)
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/st_sch_NLO/
+    xsec: 11.07
+    ngen: 1000000
+  - name: Single Top (t)
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/st_tch_NLO/
+    xsec: 856.0
+    ngen: 1000000
+  - name: Single Top (tW)
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/st_tW_NLO/
+    xsec: 67.69
+    ngen: 1000000
+  - name: WJetsToLNu
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/WJetsToLNu/
+    xsec: 34964.5
+    ngen: 1000000
+  - name: WJetsToQQ
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/WJetsToQQ/
+    xsec: 277626
+    ngen: 1000000
+  - name: WW
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/WW_NLO/
+    xsec: 78.09
+    ngen: 1000000
+  - name: WZ
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/WZ_NLO/
+    xsec: 68.399
+    ngen: 1000000
+  - name: ZZ
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/ZZ_NLO/
+    xsec: 15.909
+    ngen: 1000000
+  - name: ZJetsToNuNu
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/ZJetsToNuNu/
+    xsec: 87937.7
+    ngen: 1000000
+  - name: ZJetsToQQ
+    label: 0
+    path: /x4/cms/jyshin/TTBar_DM/ROOTF/ZJetsToQQ/
+    xsec: 94390.8
+    ngen: 1000000
